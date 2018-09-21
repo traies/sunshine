@@ -3,20 +3,31 @@
 #include <iostream>
 #include <vector>
 
-AmdEncoder::AmdEncoder(ID3D11Device * device)
+
+using namespace std;
+
+variant<AmdEncoder, sun::Error> AmdEncoder::NewEncoder(ID3D11Device * device)
 {
+	auto encoder = AmdEncoder();
 	amf::AMFFactory * factory;
-	if (!InitContext(&factory)) {
-		throw std::runtime_error("Could not initialize context.");
+	if (!encoder.InitContext(&factory)) {
+		return sun::Error("Could not initialize context.");
 	}
 
-	if (_context->InitDX11(device) == AMF_FAIL) {
-		throw std::runtime_error("Could not InitDX11.");
+	if (encoder._context->InitDX11(device) == AMF_FAIL) {
+		return sun::Error("Could not InitDX11.");
 	}
 
-	if (factory->CreateComponent(_context, AMFVideoEncoderVCE_AVC, &_encoder) == AMF_FAIL) {
-		throw std::runtime_error("Could not create AMD encoder.");
+	if (factory->CreateComponent(encoder._context, AMFVideoEncoderVCE_AVC, &encoder._encoder) == AMF_FAIL) {
+		return sun::Error("Could not create AMD encoder.");
 	}
+
+	return std::move(encoder);
+}
+
+AmdEncoder::AmdEncoder()
+{
+	
 
 }
 
@@ -54,6 +65,7 @@ bool AmdEncoder::InitContext(amf::AMFFactory ** factory)
 		std::cout << "AMF Failed to create context." << std::endl;
 		return false;
 	}
+	return true;
 }
 
 bool AmdEncoder::EncodeFrame(ID3D11Texture2D * frame)

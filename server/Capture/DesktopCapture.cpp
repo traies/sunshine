@@ -1,24 +1,35 @@
 #include "stdafx.h"
 #include "DesktopCapture.h"
 #include <iostream>
+#include <variant>
 
 using namespace Capture;
+using namespace std;
 
-DesktopCapture::DesktopCapture(HDESK desktop, ID3D11Device * device): 
-	_desktop(desktop), _device(device)
+
+
+//variant<IDXGIOutputDuplication *, sun::Error> DesktopCapture::InitIDXGIOutputDupl(ID3D11Device * device)
+//{
+//	// From DesktopDuplication sample from MSDN (DuplicationManager::InitDupl)
+//	// Get DXGI device
+//	IDXGIDevice * device;
+//
+//}
+
+DesktopCapture::DesktopCapture(HDESK desktop, AmdEncoder encoder, IDXGIOutputDuplication * outputDupl):
+	_desktop(desktop), _encoder(encoder), _outputDupl(outputDupl)
 {
-	_device->AddRef();
-}
 
+}
 
 DesktopCapture::~DesktopCapture()
 {
-	_device->Release();
 }
 
 void DesktopCapture::GrabFrame()
 {
 	auto temp = _current;
 	_current = std::chrono::high_resolution_clock::now();
+	
 	std::cout << "Grabbing Frame" << std::chrono::duration_cast<std::chrono::microseconds>(_current - temp).count() << std::endl;
 }
