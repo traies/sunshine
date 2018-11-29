@@ -5,23 +5,25 @@
 
 using namespace std;
 
-variant<AmdEncoder, sun::Error> AmdEncoder::NewEncoder(ID3D11Device * device)
+variant<unique_ptr<Encoder>, sun::Error> AmdEncoder::NewEncoder(ID3D11Device * device)
 {
-	auto encoder = AmdEncoder();
+	auto encoder = make_unique<AmdEncoder>();
 	amf::AMFFactory * factory;
-	auto error = encoder.InitContext(&factory);
+	auto error = encoder->InitContext(&factory);
 	if (error.has_value()) {
 		return error.value();
 	}
 
-	if (encoder._context->InitDX11(device) == AMF_FAIL) {
+	if (encoder->_context->InitDX11(device) == AMF_FAIL) {
 		return error.value();
 	}
 
-	if (factory->CreateComponent(encoder._context, AMFVideoEncoderVCE_AVC, &encoder._encoder) == AMF_FAIL) {
+	if (factory->CreateComponent(encoder->_context, AMFVideoEncoderVCE_AVC, &encoder->_encoder) == AMF_FAIL) {
 		return error.value();
 	}
-	return std::move(encoder);
+	unique_ptr<Encoder> ret = move(encoder);
+
+	return ret;
 }
 
 AmdEncoder::AmdEncoder()

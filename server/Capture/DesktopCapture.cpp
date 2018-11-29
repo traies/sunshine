@@ -16,8 +16,8 @@ variant<IDXGIOutputDuplication *, sun::Error> DesktopCapture::InitIDXGIOutputDup
 	return nullptr;
 }
 
-DesktopCapture::DesktopCapture(AmdEncoder encoder,IDXGIOutputDuplication * outputDupl, SOCKET sendSock, sockaddr_in remoteAddr):
-	_encoder(encoder), _outputDupl(outputDupl), _sendSock(sendSock), _remoteAddr(remoteAddr)
+DesktopCapture::DesktopCapture(unique_ptr<Encoder> encoder,IDXGIOutputDuplication * outputDupl, SOCKET sendSock, sockaddr_in remoteAddr):
+	_encoder(move(encoder)), _outputDupl(outputDupl), _sendSock(sendSock), _remoteAddr(remoteAddr)
 {
 }
 
@@ -49,10 +49,10 @@ void DesktopCapture::GrabFrame()
 				continue;
 			}
 			else {
-				_encoder.EncodeFrame(texture);
+				_encoder->EncodeFrame(texture);
 			}
 			
-			while ((buffer = _encoder.PullFrame()) == nullptr) { Sleep(1); }
+			while ((buffer = _encoder->PullFrame()) == nullptr) { Sleep(1); }
 			int start = 0, bytesLeft = buffer->size;
 			while (bytesLeft > 0) {
 				int sendBytes = min(WSAEMSGSIZE, bytesLeft);

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado\NvEncoder">
+      <UniqueIdentifier>{2910e4ef-ccc7-47dd-9727-939504a26e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\NvDecoder">
+      <UniqueIdentifier>{c1cd32b1-c818-484b-ac97-c49520785a43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Utils">
+      <UniqueIdentifier>{8e2efe49-3bce-45b6-9925-a666eed443a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\NvEncoder">
+      <UniqueIdentifier>{39c30716-67d1-4b7f-a4c8-fed3f89b9a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\NvDecoder">
+      <UniqueIdentifier>{36e792fe-efd8-4e11-9911-c243edf1d289}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="NvEncoder\NvEncoder.h">
+      <Filter>Archivos de encabezado\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="NvEncoder\NvEncoderCuda.h">
+      <Filter>Archivos de encabezado\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="NvEncoder\NvEncoderD3D9.h">
+      <Filter>Archivos de encabezado\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="NvEncoder\NvEncoderD3D11.h">
+      <Filter>Archivos de encabezado\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="NvEncoder\NvEncoderGL.h">
+      <Filter>Archivos de encabezado\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\NvEncoderCLIOptions.h">
+      <Filter>Archivos de encabezado\NvEncoder</Filter>
+    </ClInclude>
+    <ClInclude Include="NvDecoder\NvDecoder.h">
+      <Filter>Archivos de encabezado\NvDecoder</Filter>
+    </ClInclude>
+    <ClInclude Include="NvDecoder\nvcuvid.h">
+      <Filter>Archivos de encabezado\NvDecoder</Filter>
+    </ClInclude>
+    <ClInclude Include="NvDecoder\cuviddec.h">
+      <Filter>Archivos de encabezado\NvDecoder</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\FFmpegDemuxer.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\FFmpegStreamer.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\NvCodecUtils.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Logger.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="NvEncoder\nvEncodeAPI.h">
+      <Filter>Archivos de encabezado\Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="NvEncoder\NvEncoder.cpp">
+      <Filter>Archivos de origen\NvEncoder</Filter>
+    </ClCompile>
+    <ClCompile Include="NvEncoder\NvEncoderCuda.cpp">
+      <Filter>Archivos de origen\NvEncoder</Filter>
+    </ClCompile>
+    <ClCompile Include="NvEncoder\NvEncoderD3D9.cpp">
+      <Filter>Archivos de origen\NvEncoder</Filter>
+    </ClCompile>
+    <ClCompile Include="NvEncoder\NvEncoderD3D11.cpp">
+      <Filter>Archivos de origen\NvEncoder</Filter>
+    </ClCompile>
+    <ClCompile Include="NvEncoder\NvEncoderGL.cpp">
+      <Filter>Archivos de origen\NvEncoder</Filter>
+    </ClCompile>
+    <ClCompile Include="NvDecoder\NvDecoder.cpp">
+      <Filter>Archivos de origen\NvDecoder</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Utils\BitDepth.cu" />
+    <None Include="Utils\ColorSpace.cu" />
+    <None Include="Utils\Resize.cu" />
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

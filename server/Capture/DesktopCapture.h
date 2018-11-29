@@ -11,12 +11,12 @@ namespace Capture {
 	public:
 		static std::variant<IDXGIOutputDuplication *, sun::Error> InitIDXGIOutputDupl(ID3D11Device * device);
 
-		DesktopCapture(AmdEncoder encoder, IDXGIOutputDuplication * outputDupl, SOCKET sendSock, sockaddr_in remoteAddr);
+		DesktopCapture(std::unique_ptr<Encoder> encoder, IDXGIOutputDuplication * outputDupl, SOCKET sendSock, sockaddr_in remoteAddr);
 		~DesktopCapture();
 		void GrabFrame();
 	private: 
 		IDXGIOutputDuplication * _outputDupl;
-		AmdEncoder _encoder;
+		std::unique_ptr<Encoder> _encoder;
 		SOCKET _sendSock;
 		sockaddr_in _remoteAddr;
 		std::chrono::time_point<std::chrono::high_resolution_clock> _current; 
