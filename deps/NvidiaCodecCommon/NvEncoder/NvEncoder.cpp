@@ -13,7 +13,6 @@
 //#include <dlfcn.h>
 #endif
 #include "NvEncoder.h"
-#include "../../easyloggingpp/easylogging++.h"
 
 #ifndef _WIN32
 #include <cstring>
@@ -57,7 +56,7 @@ NvEncoder::NvEncoder(NV_ENC_DEVICE_TYPE eDeviceType, void *pDevice, uint32_t nWi
 		m_hEncoder = hEncoder;
 	}
 	catch (std::exception& ex) {
-		LOG(ERROR) << ex.what();
+		//LOG(ERROR) << ex.what();
 	}
     
 }
