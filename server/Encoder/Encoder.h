@@ -1,5 +1,7 @@
 #pragma once
 #include <d3d11.h>
+#include <memory>
+#include "FrameBuffer.h"
 
 class Encoder {
 public:

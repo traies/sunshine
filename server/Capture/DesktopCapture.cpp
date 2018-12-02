@@ -36,7 +36,7 @@ void DesktopCapture::GrabFrame()
 		//auto start = std::chrono::high_resolution_clock::now();
 		//while (_outputDupl->AcquireNextFrame(0, &info, &resource) != S_OK);
 		auto begin = std::chrono::high_resolution_clock::now();
-		_outputDupl->ReleaseFrame();
+		
 		auto res = _outputDupl->AcquireNextFrame(1, &info, &resource);
 		if (res == S_OK && info.LastPresentTime.QuadPart > 0) {
 			
@@ -70,6 +70,7 @@ void DesktopCapture::GrabFrame()
 			resource->Release();
 			auto end = std::chrono::high_resolution_clock::now();
 			std::cout << "Encoding latency " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << std::endl; 
+			_outputDupl->ReleaseFrame();
 		}
 		
 		
