@@ -51,8 +51,22 @@ void DesktopCapture::GrabFrame()
 			else {
 				_encoder->EncodeFrame(texture);
 			}
-			
-			while ((buffer = _encoder->PullFrame()) == nullptr) { Sleep(1); }
+			auto end = std::chrono::high_resolution_clock::now();
+			std::cout << "Encoding latency " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << std::endl;
+			for (int i = 0; i < 10; i++) {
+				buffer = _encoder->PullFrame();
+				if (buffer == nullptr) {
+					Sleep(1);
+				}
+				else {
+					break;
+				}
+			}
+			if (buffer == nullptr) {
+				resource->Release();
+				_outputDupl->ReleaseFrame();
+				continue;
+			}
 			int start = 0, bytesLeft = buffer->size;
 			while (bytesLeft > 0) {
 				int sendBytes = min(WSAEMSGSIZE, bytesLeft);
@@ -67,14 +81,14 @@ void DesktopCapture::GrabFrame()
 				}
 			}
 			//}
+			
+			
+			
+		}
+		if (res == S_OK) {
 			resource->Release();
-			auto end = std::chrono::high_resolution_clock::now();
-			std::cout << "Encoding latency " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << std::endl; 
 			_outputDupl->ReleaseFrame();
 		}
-		
-		
-
 		/*auto mid = std::chrono::high_resolution_clock::now();
 		std::cout << "GrabFrame took " << std::chrono::duration_cast<std::chrono::microseconds>(mid - start).count() << std::endl;*/
 		

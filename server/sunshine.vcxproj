@@ -75,25 +75,33 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)temp\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)deps\AMF\amf\public\include;$(IncludePath);$(SolutionDir)deps\NvidiaCodecCommon\NvEncoder;</IncludePath>
+    <IncludePath>$(SolutionDir)deps\libav-11.3-win64\win64\usr\include;$(SolutionDir)deps\AMF\amf\public\include;$(SolutionDir)deps\NvidiaCodecCommon;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin;$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)temp\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)deps\AMF\amf\public\include;$(IncludePath);$(SolutionDir)deps\NvidiaCodecCommon\NvEncoder;</IncludePath>
+    <IncludePath>$(SolutionDir)deps\libav-11.3-win64\win64\usr\include;$(SolutionDir)deps\AMF\amf\public\include;$(SolutionDir)deps\NvidiaCodecCommon;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin;$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)temp\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)deps\AMF\amf\public\include;$(IncludePath);$(SolutionDir)deps\NvidiaCodecCommon\NvEncoder;</IncludePath>
+    <IncludePath>$(SolutionDir)deps\libav-11.3-win64\win64\usr\include;$(SolutionDir)deps\AMF\amf\public\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin;$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)temp\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)deps\AMF\amf\public\include;$(IncludePath);$(SolutionDir)deps\NvidiaCodecCommon\NvEncoder;</IncludePath>
+    <IncludePath>$(SolutionDir)deps\libav-11.3-win64\win64\usr\include;$(SolutionDir)deps\AMF\amf\public\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin;$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -106,11 +114,17 @@
       <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>avcodec.lib;avutil.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin\avcodec-56.dll" "$(TargetDir)" /y
+xcopy "$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin\avutil-54.dll" "$(TargetDir)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -123,11 +137,17 @@
       <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>avcodec.lib;avutil.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin\avcodec-56.dll" "$(TargetDir)" /y
+xcopy "$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin\avutil-54.dll" "$(TargetDir)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -142,13 +162,19 @@
       <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>avcodec.lib;avutil.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin\avcodec-56.dll" "$(TargetDir)" /y
+xcopy "$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin\avutil-54.dll" "$(TargetDir)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -163,28 +189,43 @@
       <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>avcodec.lib;avutil.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin\avcodec-56.dll" "$(TargetDir)" /y
+xcopy "$(SolutionDir)deps\libav-11.3-win64\win64\usr\bin\avutil-54.dll" "$(TargetDir)" /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Capture\DesktopCapture.h" />
     <ClInclude Include="Encoder\AmdEncoder.h" />
+    <ClInclude Include="Encoder\AvEncoder.h" />
     <ClInclude Include="Encoder\Encoder.h" />
     <ClInclude Include="FrameBuffer.h" />
-    <ClInclude Include="NvidiaEncoder.h" />
+    <ClInclude Include="Encoder\NvidiaEncoder.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Capture\DesktopCapture.cpp" />
-    <ClCompile Include="Encoder\AmdEncoder.cpp" />
+    <ClCompile Include="Encoder\AmdEncoder.cpp">
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <ClCompile Include="Encoder\AvEncoder.cpp">
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
     <ClCompile Include="FrameBuffer.cpp" />
-    <ClCompile Include="NvidiaEncoder.cpp" />
+    <ClCompile Include="Encoder\NvidiaEncoder.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -200,6 +241,12 @@
     <ProjectReference Include="..\deps\NvidiaCodecCommon\NvidiaCodecCommon.vcxproj">
       <Project>{a8311a2a-7410-4539-bee0-f76dd839ef4e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="server.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="server.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

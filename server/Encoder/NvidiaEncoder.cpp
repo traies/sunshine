@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "NvidiaEncoder.h"
-#include <NvEncoder.h>
 
 
 using namespace std;

@@ -8,6 +8,9 @@
 #include "FrameBuffer.h"
 #include "Encoder\Encoder.h"
 
+
+
+
 class AmdFrameBuffer : public FrameBuffer {
 public:
 	AmdFrameBuffer(amf::AMFBufferPtr data): data(data) {}

@@ -1,6 +1,6 @@
 #pragma once
 #include "Encoder\Encoder.h"
-#include <NvEncoderD3D11.h>
+#include <NvEncoder\NvEncoderD3D11.h>
 #include <queue>
 
 class NvidiaFrameBuffer : public FrameBuffer {
